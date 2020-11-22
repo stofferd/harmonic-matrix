@@ -5,7 +5,7 @@ import Buttons from './Components/Buttons';
 function App() {
     return (
         <div className="App">
-            <Buttons />
+            <Buttons noteCount={25} />
         </div>
     );
 }

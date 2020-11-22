@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import * as Tone from 'tone';
 import { PolySynth } from 'tone';
 import Play from './Play';
+import AllHarmonics from './AllHarmonics';
+import ClearHarmonics from './ClearHarmonics';
 
 const Btns = styled.div`
     display: grid;
@@ -11,10 +13,14 @@ const Btns = styled.div`
     grid-template-rows: repeat(5, 100px);
 `;
 
-const Buttons = () => {
+type Props = {
+    noteCount: number;
+};
+
+const Buttons = ({ noteCount }: Props) => {
     const [synth, setSynth] = React.useState<null | PolySynth>(null);
     const [matrix, _setMatrix] = React.useState<number[]>(
-        new Array(25).fill(0),
+        new Array(noteCount).fill(0),
     );
     const setMatrix = React.useCallback(
         (n, on) => {
@@ -45,6 +51,8 @@ const Buttons = () => {
             {buttons}
 
             <Play matrix={matrix} synth={synth} />
+            <AllHarmonics noteCount={noteCount} setMatrix={_setMatrix} />
+            <ClearHarmonics noteCount={noteCount} setMatrix={_setMatrix} />
         </Btns>
     );
 };

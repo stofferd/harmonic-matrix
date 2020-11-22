@@ -16,9 +16,16 @@ const Play = ({ matrix, synth }: Props) => {
     const btnRef = React.useRef<HTMLButtonElement | null>(null);
 
     const handleClick = React.useCallback(() => {
+        const count = matrix.filter((item, i) => item).length;
         if (synth) {
             matrix.forEach((on, i) => {
-                if (on) synth.triggerAttackRelease(200 * (i + 1), '8n');
+                if (on)
+                    synth.triggerAttackRelease(
+                        200 * (i + 1),
+                        '16n',
+                        undefined,
+                        1 / count,
+                    );
             });
         }
         if (btnRef.current) {
